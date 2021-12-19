@@ -1,0 +1,8 @@
+#!/bin/bash
+RAND=$RANDOM
+URL="https://i.rmly.dev"
+# SECRET variable is set in /etc/environment
+
+flameshot gui -r > $RAND.png &&
+curl -F file=@$RAND.png "${URL}?secret=${SECRET}&onlyURL=1" | xclip -i -rmlastnl -sel c
+rm -rf $RAND.png

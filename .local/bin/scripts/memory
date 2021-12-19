@@ -1,0 +1,5 @@
+#!/bin/sh
+used=$(free -h --giga | awk '/^Mem:/ {print $3'})
+percent=$(free | awk '/^Mem/ { printf("%.0f%\n", $3/$2 * 100.0) }')
+
+echo "$used (${percent})"

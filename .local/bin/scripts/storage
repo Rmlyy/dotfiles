@@ -1,0 +1,5 @@
+#!/bin/sh
+used=$(df -h / | awk '/G/ {print $3}')
+percent=$(df / | awk 'END{print $5}')
+
+echo "$used (${percent})"
