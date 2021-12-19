@@ -1,13 +1,23 @@
 #!/bin/sh
-volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
-muted=$(amixer get Master | tail -2 | grep -c '\[on\]')
+volume=$(awk -F"[][]" '/dB/ { print $2 }' <(amixer sget Master) | cut -f1 -d '%')
+muted=$(amixer get Master | grep -c '\[on\]')
+microphone=$(amixer get Capture | grep -c '\[on]')
+final=
 
 if [ $muted == 0 ]; then
-	echo ""
+	final=""
 elif [ $volume -ge 40 ]; then
-	echo " $volume%"
+	final=" $volume%"
 elif [ $volume -ge 10 ]; then
-	echo " $volume%"
+	final=" $volume%"
 else
-	echo " $volume%"
+	final=" $volume%"
 fi
+
+if [ $microphone == 0 ]; then
+	final="$final "
+else
+	final="$final "
+fi
+
+echo $final
