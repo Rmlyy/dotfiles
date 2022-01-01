@@ -1,8 +1,19 @@
 #!/bin/bash
 RAND=$RANDOM
 URL="https://i.rmly.dev"
-# SECRET variable is set in /etc/environment
+# SECRET is in /etc/environment
 
 flameshot gui -r > $RAND.png &&
-curl -F file=@$RAND.png "${URL}?secret=${SECRET}&onlyURL=1" | xclip -i -rmlastnl -sel c
+	response=$(curl -s --connect-timeout 5 -sw '\nR: %{http_code}' -F file=@$RAND.png "${URL}?secret=${SECRET}&onlyURL=1")
+
+OUTPUT=$(echo $response | cut -d 'R' -f1)
+if [[ $response == *"R: 200"* ]]; then
+	echo $OUTPUT | xclip -i -rmlastnl -sel c
+	notify-send "✅ Screenshot URL copied"
+elif [[ $response == *"R: 000"* ]]; then
+	notify-send "❌ FAIL: Server did not respond"
+else
+	notify-send "❌ FAIL: ${OUTPUT}"
+fi
+
 rm -rf $RAND.png
