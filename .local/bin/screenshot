@@ -9,11 +9,11 @@ flameshot gui -r > $RAND.png &&
 OUTPUT=$(echo $response | cut -d 'R' -f1)
 if [[ $response == *"R: 200"* ]]; then
 	echo $OUTPUT | xclip -i -rmlastnl -sel c
-	notify-send "✅ Screenshot URL copied"
+	notify-send "✅ SUCCESS" "Screenshot URL copied"
 elif [[ $response == *"R: 000"* ]]; then
-	notify-send "❌ FAIL: Server did not respond"
+	notify-send "❌ FAIL" "Server did not respond"
 else
-	notify-send "❌ FAIL: ${OUTPUT}"
+	notify-send "❌ FAIL" "${OUTPUT}"
 fi
 
 rm -rf $RAND.png

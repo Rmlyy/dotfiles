@@ -14,5 +14,8 @@ slstatus &
 # Run flameshot
 flameshot &
 
+# Run dunst
+dunst &
+
 # Run DWM
 exec dwm
