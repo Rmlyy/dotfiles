@@ -1,10 +1,10 @@
 #!/bin/sh
-volume=$(awk -F"[][]" '/dB/ { print $2 }' <(amixer sget Master) | cut -f1 -d '%')
-muted=$(amixer get Master | grep -c '\[on\]')
-microphone=$(amixer get Capture | grep -c '\[on]')
+volume=$(pamixer --get-volume)
+is_muted=$(pamixer --get-mute)
+is_mic_muted=$(pactl get-source-mute 0 | grep -c yes)
 final=
 
-if [ $muted == 0 ]; then
+if [ $is_muted == true ]; then
 	final=""
 elif [ $volume -ge 40 ]; then
 	final=" $volume%"
@@ -14,7 +14,7 @@ else
 	final=" $volume%"
 fi
 
-if [ $microphone == 0 ]; then
+if [ $is_mic_muted == 1 ]; then
 	final="$final "
 else
 	final="$final "

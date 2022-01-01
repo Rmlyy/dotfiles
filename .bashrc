@@ -10,7 +10,6 @@ alias rm='rm -v'
 alias sxiv='devour sxiv'
 alias mpv='devour mpv'
 alias ncdu='ncdu --color dark'
-alias samp='wine ~/Downloads/GTA\ San\ Andreas/samp.exe'
 
 source ~/.secretsrc
 
@@ -18,7 +17,7 @@ source ~/.secretsrc
 PATH=$PATH:~/.local/bin:~/.local/bin/scripts
 
 # Nice colored prompt
-PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
+PS1="\[$(tput bold)\]\[$(tput setaf 7)\][\[$(tput setaf 6)\]\u\[$(tput setaf 1)\]@\[$(tput setaf 7)\]\h \[$(tput setaf 4)\]\W\[$(tput setaf 7)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
-# Run pfetch
-PF_INFO="ascii title os host kernel uptime wm pkgs memory" pfetch
+# Execute a random color script
+find .local/bin/scripts/colorscripts -type f | shuf -n 1 | sh
