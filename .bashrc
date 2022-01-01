@@ -10,6 +10,7 @@ alias rm='rm -v'
 alias sxiv='devour sxiv'
 alias mpv='devour mpv'
 alias ncdu='ncdu --color dark'
+alias weather='curl wttr.in'
 
 source ~/.secretsrc
 
@@ -20,4 +21,4 @@ PATH=$PATH:~/.local/bin:~/.local/bin/scripts
 PS1="\[$(tput bold)\]\[$(tput setaf 7)\][\[$(tput setaf 6)\]\u\[$(tput setaf 1)\]@\[$(tput setaf 7)\]\h \[$(tput setaf 4)\]\W\[$(tput setaf 7)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
 # Execute a random color script
-find .local/bin/scripts/colorscripts -type f | shuf -n 1 | sh
+find ~/.local/bin/scripts/colorscripts -type f | shuf -n 1 | sh
