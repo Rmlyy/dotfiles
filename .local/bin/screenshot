@@ -12,7 +12,7 @@ if [[ $response == *"R: 200"* ]]; then
 	notify-send "✅ SUCCESS" "Screenshot URL copied"
 elif [[ $response == *"R: 000"* ]]; then
 	notify-send "❌ FAIL" "Server did not respond"
-else
+elif [[ $response == *"R:"* ]]; then
 	notify-send "❌ FAIL" "${OUTPUT}"
 fi
 
