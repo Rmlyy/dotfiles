@@ -4,5 +4,7 @@ do
         case "$1" in
         "C-w")
                 feh --bg-scale "$file" ;;
+	"C-d")
+		rm -rf "$file" ;;
         esac
 done
